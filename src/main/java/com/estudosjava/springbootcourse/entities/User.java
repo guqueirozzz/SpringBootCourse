@@ -1,12 +1,11 @@
 package com.estudosjava.springbootcourse.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 
 
 @Entity
@@ -23,15 +22,19 @@ public class User implements Serializable {
     private String phoneNumber;
     private String password;
 
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
 
     public User() {}
 
-    public User(Long id, String name, String email, String phoneNumber, String password) {
+    public User(Long id, String name, String email, String phoneNumber, String password, List<Order> orders) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.orders = orders;
     }
 
     public long getId() {
@@ -73,6 +76,13 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Order> getOrders () {return orders;}
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
 
     @Override
     public boolean equals(Object o) {
