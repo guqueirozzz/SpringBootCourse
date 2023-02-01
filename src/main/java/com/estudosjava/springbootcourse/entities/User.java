@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -22,6 +23,8 @@ public class User implements Serializable {
     private String phoneNumber;
     private String password;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
@@ -29,6 +32,7 @@ public class User implements Serializable {
     public User() {}
 
     public User(Long id, String name, String email, String phoneNumber, String password, List<Order> orders) {
+        super();
         this.id = id;
         this.name = name;
         this.email = email;
