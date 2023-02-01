@@ -3,10 +3,12 @@ package com.estudosjava.springbootcourse.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "db_categories")
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,11 +18,20 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
+    @Transient
+    private Set<Product> products = new HashSet<>();
+
     public Category() {}
 
     public Category(Long id, String name) {
+        super();
         this.id = id;
         this.name = name;
+        //this.products = products;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public Long getId() {

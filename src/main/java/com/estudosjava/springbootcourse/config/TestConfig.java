@@ -1,11 +1,13 @@
 package com.estudosjava.springbootcourse.config;
 
 import com.estudosjava.springbootcourse.entities.Category;
+import com.estudosjava.springbootcourse.entities.Product;
 import com.estudosjava.springbootcourse.entities.User;
 import com.estudosjava.springbootcourse.entities.Order;
 import com.estudosjava.springbootcourse.entities.enums.OrderStatus;
 import com.estudosjava.springbootcourse.repositories.CategoryRepository;
 import com.estudosjava.springbootcourse.repositories.OrderRepository;
+import com.estudosjava.springbootcourse.repositories.ProductRepository;
 import com.estudosjava.springbootcourse.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -29,6 +31,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -47,11 +52,18 @@ public class TestConfig implements CommandLineRunner {
         Category c2 = new Category(null, "Categoria2");
         Category c3 = new Category(null, "Categoria3");
 
+        Product p1 = new Product(null, "PLAYSTATION 5", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Product p2 = new Product(null, "RTX 4090 Ti", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
         orderList.add(o1);
         orderList.add(o2);
         orderList.add(o3);
         userRepository.saveAll(Arrays.asList(u1, u2, u3,u4));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
+        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
     }
 }
