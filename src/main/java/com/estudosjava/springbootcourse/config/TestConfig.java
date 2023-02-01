@@ -2,6 +2,7 @@ package com.estudosjava.springbootcourse.config;
 
 import com.estudosjava.springbootcourse.entities.User;
 import com.estudosjava.springbootcourse.entities.Order;
+import com.estudosjava.springbootcourse.entities.enums.OrderStatus;
 import com.estudosjava.springbootcourse.repositories.OrderRepository;
 import com.estudosjava.springbootcourse.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class TestConfig implements CommandLineRunner {
         User u3 = new User(null, "Joao", "joao.queiroz@gmail.com", "988838773", "test2", orderList);
         User u4 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456", orderList);
 
-        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
-        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
-        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"),  u1, OrderStatus.SHIPPED);
+        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"),  u2, OrderStatus.PAID);
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.WAITING_PAYMENT);
         orderList.add(o1);
         orderList.add(o2);
         orderList.add(o3);
