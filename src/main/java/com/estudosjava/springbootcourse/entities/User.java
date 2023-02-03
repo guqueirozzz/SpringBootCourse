@@ -25,7 +25,7 @@ public class User implements Serializable {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client") // um usuario para varios pedidos
     private List<Order> orders = new ArrayList<>();
 
 
