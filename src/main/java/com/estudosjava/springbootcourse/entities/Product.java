@@ -1,5 +1,6 @@
 package com.estudosjava.springbootcourse.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -26,6 +27,10 @@ public class Product implements Serializable {
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),  inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.product")// One = Order to -> Many = items. um pedido para varios items
+    private Set<OrderItem> items = new HashSet<>();
+
+
     public Product () {}
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
@@ -35,7 +40,7 @@ public class Product implements Serializable {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
-        //this.categories = categories;
+        //this.categories = categories; categorias ja instanciado, por isso nao adicionei aqui
     }
 
     public Long getId() {
@@ -82,6 +87,14 @@ public class Product implements Serializable {
         return categories;
     }
 
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem orderItem : items) {
+            set.add(orderItem.getOder());
+        }
+        return set;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

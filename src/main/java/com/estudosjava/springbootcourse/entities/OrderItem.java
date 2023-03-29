@@ -16,7 +16,7 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId /* Para id's compostos. O Spring entra dentro da classe
-                 e adiciona na tabela tb_order_item as colunas da classe OrderItemPK pelos @JoinColumn*/
+                 e adiciona na tabela tb_order_item as colunas da classe OrderItemPK pelos @JoinColumn */
     private OrderItemPK id = new OrderItemPK(); // tem que instanciar por ser id_composto
     private Integer quantity;
     private Double price;
@@ -39,6 +39,7 @@ public class OrderItem implements Serializable {
     public void setOrder(Order order){
         id.setOrder(order);
     }
+
 
     public Product getProduct() {
         return id.getProduct();

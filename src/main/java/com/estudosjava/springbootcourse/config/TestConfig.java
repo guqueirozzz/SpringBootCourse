@@ -34,16 +34,22 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
         List<Order> orderList = new ArrayList<>();
+
 
         User u1 = new User(null, "Gustavo", "gustavo.queiroz@gmail.com", "988838773", "test", orderList);
         User u2 = new User(null, "Maria", "maria.queiroz@gmail.com", "988838773", "test1", orderList);
         User u3 = new User(null, "Joao", "joao.queiroz@gmail.com", "988838773", "test2", orderList);
         User u4 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456", orderList);
 
-        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"),  u1, OrderStatus.SHIPPED);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"),  u2, OrderStatus.SHIPPED);
         Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"),  u2, OrderStatus.PAID);
-        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.WAITING_PAYMENT);
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u3, OrderStatus.WAITING_PAYMENT);
+
+        orderList.add(o1);
+        orderList.add(o2);
+        orderList.add(o3);
 
         Category c1 = new Category(null, "Categoria1");
         Category c2 = new Category(null, "Categoria2");
@@ -63,10 +69,6 @@ public class TestConfig implements CommandLineRunner {
         p4.getCategories().add(c3);
         p5.getCategories().add(c2);
 
-        orderList.add(o1);
-        orderList.add(o2);
-        orderList.add(o3);
-
         userRepository.saveAll(Arrays.asList(u1, u2, u3,u4));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
@@ -80,8 +82,9 @@ public class TestConfig implements CommandLineRunner {
         // instanciando or orderItems
         OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
         OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
-        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
-        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+        OrderItem oi3 = new OrderItem(o1, p4, 1, p4.getPrice());
+        OrderItem oi4 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi5 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
